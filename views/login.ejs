@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cleaning</title>
+    <link rel="stylesheet" href="/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+    
+
+<div class="container">
+    
+        <p id="login"> login page</p><br>
+      <form action="/login" method="POST" >
+            <label for="email">email:</label>
+            <input id="email" type="text" placeholder="Email" required><br>
+            <label for="password">Password:</label>
+            <input id="password" type="password" placeholder="Password" rerquired>
+            
+           <div class="button">
+            <button id="submit" type="submit">Login</button>
+           </div> 
+            <p>Don't have an account? <a href="/create">Sign up</a></p>
+         </form>
+         </div>
+
+     
+
+    <script>
+        const form = document.querySelector('form');
+        const emailInput = document.getElementById('email');
+     
+        const passwordInput = document.getElementById('password');
+        const submitButton = document.getElementById('submit');
+      
+
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            submitButton.disabled = true;
+            submitButton.textContent = 'Logging in...';
+            console.log(emailInput);
+
+            try {
+                const response = await fetch('role/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                   
+                    body: JSON.stringify({
+                        email: emailInput.value,
+                        password: passwordInput.value
+                    })
+                });
+                console.log(response);
+
+                const data = await response.json();
+                console.log(data);
+
+                if (!response.ok) {
+                    throw new Error(data.message || 'Login failed');
+                }
+
+                alert('Login successful');
+                window.location.href = '/mainpage';
+            } catch (error) {
+                console.error('Error:', error);
+                alert(error.message || 'An error occurred while logging in.');
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Login';
+            }
+        });
+
+
+
+
+
+    
+
+
+</script>
+</body> 
+    
+</body>
+</html>

@@ -121,9 +121,13 @@ exports.getusers=async(req,res)=>{
     const image=req.file;
     console.log(image);
 
-    if(image.fieldname ==='uploads'){
-       res.status(200).json( {message:"image uploaded"})
-        }
+    if(image.fieldname ==='user'){
+       res.status(200).json( {message:" user image uploaded sucessfully"})
+    }
+        if(image.fieldname ==='admin'){
+            res.status(200).json( {message:" admin image uploaded sucessfully"})
+             }
+             
     else {
         res.status(400).json("image not uploaded")
        

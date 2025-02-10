@@ -4,7 +4,7 @@ const router=express.Router();
 const roleController=require('../controller/roleController');
 
 const multer = require('multer');
-const { uploadprofile } = require('../helper/multer1');
+const { uploadprofile, uploadadminprofile } = require('../helper/multer1');
 
 
 
@@ -27,5 +27,6 @@ router.delete("/delete/:id",roleController.deleteuser);
 
 router.post("/vscode/org/createadmin",roleController.createAdmin);
 router.post("/uploadprofile",uploadprofile,roleController.upl);
+
 
 module.exports=router;
